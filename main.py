@@ -1,16 +1,24 @@
 import pygame
 from constants import *
+from player import *
+
 
 def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    background_color = "black"
+    clock = pygame.time.Clock()
+    dt = 0
+    x = SCREEN_WIDTH / 2
+    y = SCREEN_HEIGHT / 2
+    player = Player(x, y)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-        screen.fill(background_color)
+        player.update(dt)
+        screen.fill("black")
+        player.draw(screen)
         pygame.display.flip()
-    print(f"Starting asteroids!\nScreen width: {SCREEN_WIDTH}\nScreen height: {SCREEN_HEIGHT}")
+        dt = clock.tick(60) / 1000
 
 
 if __name__ == "__main__":
